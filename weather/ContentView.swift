@@ -36,7 +36,7 @@ struct ContentView: View {
                     weatherdays(dayofweek: "WED", imgname: "sun.max.fill", temp: 21)
                     weatherdays(dayofweek: "THUR", imgname: "sun.snow.fill", temp: 18)
                     weatherdays(dayofweek: "FRI", imgname: "cloud.sun.fill", temp: 34)
-                    weatherdays(dayofweek: "SAT", imgname: "cloud.sun.fill", temp: 72)
+                    weatherdays(dayofweek: "SAT", imgname: "cloud.moon.rain.fill", temp: 72)
                 }
                 Spacer()
             }
