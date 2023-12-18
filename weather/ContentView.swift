@@ -31,7 +31,7 @@ struct ContentView: View {
                         .font(.system(size: 80, weight: .medium))
                         .foregroundColor(.white)
                 }
-                Spacer()
+                .padding(.bottom, 40)
                 HStack (spacing: 28){
                     weatherdays(dayofweek: "TUE", imgname: "cloud.sun.fill", temp: 32)
                     weatherdays(dayofweek: "WED", imgname: "sun.max.fill", temp: 21)
@@ -40,12 +40,17 @@ struct ContentView: View {
                     weatherdays(dayofweek: "SAT", imgname: "cloud.moon.rain.fill", temp: 72)
                 }
                 Spacer()
-                Text("Diptayan Jash")
-                    .fontWeight(.semibold)
-                    .foregroundColor(.red)
-                    .font(.caption)
-                    .multilineTextAlignment(.center)
-                    
+                Button {
+                    print("Buton Pressed")
+                } label: {
+                    Text("button")
+                        .frame(width: 180, height: 50)
+                        .background(Color.white)
+                        .font(.system(size: 20, weight: .bold))
+                        .cornerRadius(10)
+                }
+                Spacer()
+
             }
         }
     }
