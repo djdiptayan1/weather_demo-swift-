@@ -40,6 +40,12 @@ struct ContentView: View {
                     weatherdays(dayofweek: "SAT", imgname: "cloud.moon.rain.fill", temp: 72)
                 }
                 Spacer()
+                Text("Diptayan Jash")
+                    .fontWeight(.semibold)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                    .multilineTextAlignment(.center)
+                    
             }
         }
     }
