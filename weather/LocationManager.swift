@@ -25,11 +25,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        self.location = location
+func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let newLocation = locations.last else { return }
+    
+    // Only update the location and perform reverse geocoding if the location has changed significantly
+    if let oldLocation = self.location {
+        let distance = newLocation.distance(from: oldLocation)
+        if distance > 100 { // Change this value to suit your needs
+            self.location = newLocation
+            geocode()
+        }
+    } else {
+        // This is the first location update
+        self.location = newLocation
         geocode()
     }
+}
 
     private func geocode() {
         guard let location = location else { return }
