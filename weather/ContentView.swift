@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @StateObject var locationManager = LocationManager()
+
     @State private var isNight = false
-    
+    @State private var showAlert = false
+
     var body: some View {
         ZStack {
 //          Color.blue.edgesIgnoringSafeArea()
             background_color(isNight: isNight)
 
             VStack {
-                city(cityname: "Cupertino, CA")
+                Text("Current location: \(locationManager.location?.coordinate.latitude ?? 0), \(locationManager.location?.coordinate.longitude ?? 0)")
+                if let placemark = locationManager.placemark {
+                    city(cityname: "\(placemark.locality ?? ""), \(placemark.country ?? "")")
+                } else {
+                    Text("Locating...")
+                }
 
+//                city(cityname: "Cupertino, CA")
                 Currentweather(weather_img: isNight ? "moon.stars.fill" : "cloud.sun.fill", curr_temp: 78)
 
                 HStack(spacing: 28) {
@@ -29,14 +37,20 @@ struct ContentView: View {
                     weatherdays(dayofweek: "SAT", imgname: "cloud.moon.rain.fill", temp: 72)
                 }
                 Spacer()
-                
+
                 Button {
                     isNight.toggle()
                     print("button pressed")
                 } label: {
                     WeatherButton(title: "change", bg_color: isNight ?.white : .blue, fg_color: isNight ? .red : .white)
+                }.onLongPressGesture {
+                    showAlert = true
+                    print("Long Pressed")
                 }
-                
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Alert"), message: Text("This is an alert"), dismissButton: .default(Text("OK")))
+                }
+
                 Spacer()
             }
         }
@@ -72,7 +86,7 @@ struct weatherdays: View {
 }
 
 struct background_color: View {
-    var isNight:Bool
+    var isNight: Bool
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue, isNight ? .gray : .white]), startPoint: .topLeading, endPoint: .bottomTrailing)
             .ignoresSafeArea()
