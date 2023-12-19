@@ -16,6 +16,7 @@
 		9D0F0AB72B29AA2A00E0524C /* weatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0F0AB62B29AA2A00E0524C /* weatherUITestsLaunchTests.swift */; };
 		9D3B9B592B30599B00E73AB4 /* WeatherButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B9B582B30599B00E73AB4 /* WeatherButton.swift */; };
 		9DA6DDB62B31B4B5008068F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA6DDB52B31B4B5008068F4 /* LocationManager.swift */; };
+		9DA6DDB82B31B893008068F4 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA6DDB72B31B893008068F4 /* SafariView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		9D0F0AB62B29AA2A00E0524C /* weatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9D3B9B582B30599B00E73AB4 /* WeatherButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherButton.swift; sourceTree = "<group>"; };
 		9DA6DDB52B31B4B5008068F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		9DA6DDB72B31B893008068F4 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				9D0F0A992B29AA2800E0524C /* weatherApp.swift */,
 				9D0F0A9B2B29AA2800E0524C /* ContentView.swift */,
+				9DA6DDB72B31B893008068F4 /* SafariView.swift */,
 				9DA6DDB52B31B4B5008068F4 /* LocationManager.swift */,
 				9D3B9B582B30599B00E73AB4 /* WeatherButton.swift */,
 				9D0F0A9D2B29AA2900E0524C /* Assets.xcassets */,
@@ -267,6 +270,7 @@
 				9D0F0A9C2B29AA2800E0524C /* ContentView.swift in Sources */,
 				9D0F0A9A2B29AA2800E0524C /* weatherApp.swift in Sources */,
 				9D3B9B592B30599B00E73AB4 /* WeatherButton.swift in Sources */,
+				9DA6DDB82B31B893008068F4 /* SafariView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
