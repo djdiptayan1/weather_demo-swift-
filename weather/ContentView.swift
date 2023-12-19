@@ -12,6 +12,9 @@ struct ContentView: View {
 
     @State private var isNight = false
     @State private var showAlert = false
+    @State private var showSheet = false
+    @State private var temp = 0.0
+    let generator = UIImpactFeedbackGenerator(style: .heavy)
 
     var body: some View {
         ZStack {
@@ -23,11 +26,11 @@ struct ContentView: View {
                 if let placemark = locationManager.placemark {
                     city(cityname: "\(placemark.locality ?? ""), \(placemark.country ?? "")")
                 } else {
-                    Text("Locating...")
+                    city(cityname: "Locating...")
                 }
 
 //                city(cityname: "Cupertino, CA")
-                Currentweather(weather_img: isNight ? "moon.stars.fill" : "cloud.sun.fill", curr_temp: 78)
+                Currentweather(weather_img: isNight ? "moon.stars.fill" : "cloud.sun.fill", curr_temp: temp)
 
                 HStack(spacing: 28) {
                     weatherdays(dayofweek: "TUE", imgname: "cloud.sun.fill", temp: 32)
@@ -36,19 +39,33 @@ struct ContentView: View {
                     weatherdays(dayofweek: "FRI", imgname: "cloud.sun.fill", temp: 34)
                     weatherdays(dayofweek: "SAT", imgname: "cloud.moon.rain.fill", temp: 72)
                 }
+                .onLongPressGesture(minimumDuration: 2.0) {
+                    print("Long Press")
+                    generator.impactOccurred()
+                    showSheet = true
+                }
+                .sheet(isPresented: $showSheet) {
+                    if let url = URL(string: "https://djdiptayan.in") {
+                        SafariView(url: url)
+                    } else {
+                        Text("Invalid URL")
+                    }
+                }
                 Spacer()
 
+                Slider(value: $temp, in: 0 ... 100, step: 4)
+                    .accentColor(.green)
+                    .padding()
+                    .onReceive([self.temp].publisher.first()) { _ in
+                        generator.impactOccurred()
+                    }
+
                 Button {
+                    generator.impactOccurred()
                     isNight.toggle()
                     print("button pressed")
                 } label: {
                     WeatherButton(title: "change", bg_color: isNight ?.white : .blue, fg_color: isNight ? .red : .white)
-                }.onLongPressGesture {
-                    showAlert = true
-                    print("Long Pressed")
-                }
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text("Alert"), message: Text("This is an alert"), dismissButton: .default(Text("OK")))
                 }
 
                 Spacer()
@@ -106,7 +123,7 @@ struct city: View {
 
 struct Currentweather: View {
     var weather_img: String
-    var curr_temp: Int
+    var curr_temp: Double
 
     var body: some View {
         VStack(spacing: 8) {
@@ -116,7 +133,7 @@ struct Currentweather: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
 
-            Text("\(curr_temp)°")
+            Text(String(format: "%.1f°", curr_temp))
                 .font(.system(size: 80, weight: .medium))
                 .foregroundColor(.white)
         }
